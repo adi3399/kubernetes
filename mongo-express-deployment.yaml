@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: mongo-express
-        image:mongo-express
+        image: mongo-express
         ports:
         - containerPort: 8081
         env:
@@ -34,9 +34,9 @@ spec:
           valueFrom: 
             configMapKeyRef:
               name: mongodb-configmap
-              key: mongodb-service
+              key: database_url
 ---
-apiVersion: apps/v1
+apiVersion: v1
 kind: Service
 metadata:
   name: mongo-express-service
@@ -46,6 +46,6 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 27017
-      targetPort: 27017
+      port: 8081
+      targetPort: 8081
       nodePort: 30000
